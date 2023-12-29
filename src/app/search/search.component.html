@@ -1,0 +1,193 @@
+<form [formGroup]="formGroup">
+  <div class="p-fluid p-formgrid p-grid">
+    <!-- Hotel Name or City -->
+    <div class="p-field p-col-12 p-md-4 p-lg-3">
+      <input
+        type="text"
+        pInputText
+        id="hotelNameOrCity"
+        [formControlName]="'hotelNameOrCity'"
+        [placeholder]="'Enter The Hotel Name or City'"
+      />
+    </div>
+
+    <!-- Check-In Date -->
+    <div class="p-field p-col-12 p-md-4 p-lg-3 date-range-container">
+      <!-- Check-In Date -->
+      <div class="check-in-date">
+        <p-calendar
+          [showButtonBar]="true"
+          [formControlName]="'checkInDate'"
+          placeholder="Check-In Date"
+          dateFormat="mm/dd/yy"
+          [showIcon]="true"
+          [minDate]="calculateMinCheckInDate()"
+          [readonlyInput]="true"
+        ></p-calendar>
+      </div>
+
+      <!-- Check-Out Date -->
+      <div class="check-out-date">
+        <p-calendar
+          [showButtonBar]="true"
+          [formControlName]="'checkOutDate'"
+          placeholder="Check-Out Date"
+          dateFormat="mm/dd/yy"
+          [showIcon]="true"
+          [minDate]="calculateMinCheckOutDate()"
+          [readonlyInput]="true"
+        ></p-calendar>
+      </div>
+    </div>
+
+    <div class="p-field p-col-12 p-md-4 p-lg-3 dropdown-container">
+      <!-- Dropdown 1 -->
+      <div class="dropdown1">
+        <p-dropdown
+          [options]="dropdown1Options"
+          placeholder="Super Deluxe"
+          [formControlName]="'dropdown1'"
+        ></p-dropdown>
+      </div>
+
+      <!-- Dropdown 2 -->
+      <div class="dropdown2">
+        <p-dropdown
+          [options]="dropdown2Options"
+          placeholder="Bed Only"
+          [formControlName]="'dropdown2'"
+        ></p-dropdown>
+      </div>
+    </div>
+
+    <div class="p-field p-col-12 p-md-4 p-lg-3">
+      <button
+        type="button"
+        pButton
+        pRipple
+        class="search-button p-button-text dailog-button"
+        label="Add Room"
+        (click)="openDailog()"
+      ></button>
+    </div>
+  </div>
+
+  <button
+    type="button"
+    (click)="onSubmit()"
+    pButton
+    pRipple
+    label="Search"
+    icon="pi pi-check"
+    class="search-button p-button-text"
+  ></button>
+
+  <button
+    type="button"
+    (click)="onClick()"
+    pButton
+    pRipple
+    label="Add New Details"
+    icon="pi pi-check"
+    class="search-button p-button-text"
+  ></button>
+</form>
+
+<p-dialog [(visible)]="commentDialogVisible" [style]="{ width: '350px'}">
+  <div class="p-fluid">
+    <div class="p-col-12">
+      <form #roomForm="ngForm">
+        <div *ngFor="let room of rooms; let i = index">
+          <p-card [style]="{ 'margin-bottom': '15px' }" header="Room {{ i + 1 }}">
+            <button
+              *ngIf="i > 0"
+              pButton
+              pRipple
+              (click)="confirmDeleteRoom(i)"
+              icon="pi pi-trash"
+              class="p-button-danger p-button-outlined delete-button"
+            ></button>
+
+            <!-- Dropdown -->
+            <div class="p-field">
+              <label>Select Bed Type:</label>
+              <p-dropdown
+                [options]="bedOptions"
+                placeholder="Select Bed Type"
+                [style]="{ width: '100%' }"
+                [(ngModel)]="room.selectedBedType"
+                name="bedType"
+                #bedTypeField="ngModel"
+                required
+              ></p-dropdown>
+            </div>
+
+            <!-- Input Number 1 -->
+            <div class="p-field">
+              <label>Adults (13+):</label>
+              <p-inputNumber
+                [showButtons]="true"
+                buttonLayout="horizontal"
+                inputId="number1"
+                [step]="1"
+                [min]="2"
+                decrementButtonClass="p-button-danger"
+                incrementButtonClass="p-button-danger"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                [(ngModel)]="room.adults"
+                name="number1"
+                #number1Field="ngModel"
+                required
+              ></p-inputNumber>
+            </div>
+
+            <!-- Input Number 2 -->
+            <div class="p-field">
+              <label>Children (2-12):</label>
+              <p-inputNumber
+                [showButtons]="true"
+                buttonLayout="horizontal"
+                inputId="number2"
+                [step]="1"
+                [min]="1"
+                decrementButtonClass="p-button-danger"
+                incrementButtonClass="p-button-danger"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                [(ngModel)]="room.children"
+                name="number2"
+                #number2Field="ngModel"
+                required
+              ></p-inputNumber>
+            </div>
+          </p-card>
+        </div>
+
+        <!-- Button to add a new room -->
+        <div class="p-field">
+          <p-button label="Add Room" (click)="addRoom()" icon="pi pi-plus" styleClass="p-button-success"></p-button>
+        </div>
+
+        <!-- Button to apply the room details -->
+        <div class="p-field">
+          <p-button label="Apply" (click)="submitRoomDetails()" icon="pi pi-check" styleClass="p-button-danger"></p-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</p-dialog>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

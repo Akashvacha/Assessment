@@ -1,0 +1,24 @@
+<div *ngIf="formData">
+  <h2>Hotel Reservation Details</h2>
+
+  <!-- Display Form Values -->
+  <div>
+    <h3>Hotel Details </h3>
+    <p>Hotel Name or City: {{ formData.formValues.hotelNameOrCity }}</p>
+    <p>Check-In Date: {{ formData.formValues.checkInDate | date:'medium' }}</p>
+    <p>Check-Out Date: {{ formData.formValues.checkOutDate | date:'medium' }}</p>
+  </div>
+  <hr>
+
+  <!-- Display Room Details -->
+  <div>
+    <h3>Room Details</h3>
+    <div *ngFor="let room of formData.roomDetails">
+      <p>Room Number: {{ room.roomNumber }}</p>
+      <p>Adults: {{ room.Adults }}</p>
+      <p>Child: {{ room.Child }}</p>
+      <p>Bed Type: {{ room.selectedBedType }}</p>
+      <hr>
+    </div>
+  </div>
+</div>

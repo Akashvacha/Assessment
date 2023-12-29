@@ -1,0 +1,87 @@
+form {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.p-field,
+.p-dropdown,
+button {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.p-grid, .p-formgrid {
+  display: flex;
+}
+
+input,
+select,
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+input {
+  height: 5.5rem;
+  width: 15rem !important;
+}
+
+.check-in-date {
+  height: 2rem;
+}
+
+.check-out-date {
+  position: relative;
+  top: 1rem;
+}
+
+.dropdown2 {
+  position: relative;
+  top: 0.6rem;
+}
+
+.dailog-button ,input{
+  top: 0;
+  display: flex;
+  align-items: center;
+  width: 13rem;
+  height: 5.4rem;
+  background-color: white !important;
+  border: 0.5px solid black !important;
+  color: black !important;
+}
+
+
+.delete-button {
+  bottom: 3.5rem;
+  left: 11.5rem;
+}
+
+p-dailog{
+  height: 24rem;
+  width: 345px!important;
+}
+
+.search-button{
+  bottom: 0.2rem;
+  background-color: #f32121;
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/*button {*/
+/*  background-color: #6c6ce5;*/
+/*  color: #6565ee;*/
+/*  cursor: pointer;*/
+/*}*/
+
+button:hover {
+  background-color: inherit;
+  border-color: inherit;
+  color: inherit;
+}
